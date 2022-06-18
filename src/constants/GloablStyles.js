@@ -57,6 +57,8 @@ export const styles = StyleSheet.create({
     //keyboard
     row: {
         maxWidth: '100%',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
         flexDirection: 'row'
     },
     viewBottom: {
