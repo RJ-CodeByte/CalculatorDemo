@@ -21,7 +21,7 @@ export class ReduxCalc extends Component {
             isGrey: true
         }, {
             title: '%',
-            // operation: () => this.handleOperationPressed("%"),
+            operation: () => this.props.handleOperationPressed("%"),
             isGrey: true
         },
         {
@@ -31,7 +31,7 @@ export class ReduxCalc extends Component {
         },
         {
             title: "÷",
-            // operation: () => this.handleOperationPressed("/"),
+            operation: () => this.props.handleOperationPressed("/"),
             isBlue: true
         },
         {
@@ -49,7 +49,7 @@ export class ReduxCalc extends Component {
         },
         {
             title: "×",
-            // operation: () => this.handleOperationPressed("*"),
+            operation: () => this.props.handleOperationPressed("*"),
             isBlue: true
         },
         {
@@ -65,7 +65,7 @@ export class ReduxCalc extends Component {
         },
         {
             title: "-",
-            // operation: () => this.handleOperationPressed("-"),
+            operation: () => this.props.handleOperationPressed("-"),
             isBlue: true
         },
         {
@@ -131,45 +131,45 @@ export class ReduxCalc extends Component {
                 break;
             case "-":
                 this.props.clear();
-                // this.setState({ result: parseInt(this.state.firstNumber) - parseInt(this.state.secondNumber) })
+                this.props.getResult(parseInt(this.props.secondNumber) - parseInt(this.props.firstNumber))
                 break;
             case "*":
                 this.props.clear();
-                // this.setState({ result: parseInt(this.state.firstNumber) * parseInt(this.state.secondNumber) })
+                this.props.getResult(parseInt(this.props.firstNumber) * parseInt(this.props.secondNumber))
                 break;
             case "/":
                 this.props.clear();
-                // this.setState({ result: parseInt(this.state.firstNumber) / parseInt(this.state.secondNumber) })
+                this.props.getResult(parseInt(this.props.secondNumber) / parseInt(this.props.firstNumber))
                 break;
             case "%":
                 this.props.clear();
-                // this.setState({ result: parseInt(this.state.secondNumber) % parseInt(this.state.firstNumber) })
+                this.props.getResult(parseInt(this.props.secondNumber) % parseInt(this.props.firstNumber))
                 break;
             default:
                 this.props.clear();
-                // this.setState({ result: 0 })
+                this.props.getResult(0)
                 break;
         }
     }
 
 
-    // firstNumberDisplay = () => {
-    //     if (this.state.result !== null) {
-    //         return <Text style={this.state.result < 99999 ? [styles.screenFirstNumber, { color: colors.result }] : [styles.screenFirstNumber, { fontSize: 30, color: colors.result }]}>{this.state.result?.toString()}</Text>
-    //     }
-    //     if (this.state.firstNumber && this.state.firstNumber.length < 6) {
-    //         return <Text style={styles.screenFirstNumber}>{this.state.firstNumber}</Text>
-    //     }
-    //     if (this.state.firstNumber === "") {
-    //         return <Text style={styles.screenFirstNumber}>{"0"}</Text>
-    //     }
-    //     // if (this.state.firstNumber.length > 5 && this.state.firstNumber.length < 8) {
-    //     //     return <Text style={[styles.screenFirstNumber, { fontSize: 70 }]}>{this.state.firstNumber}</Text>
-    //     // }
-    //     if (this.state.firstNumber > 7) {
-    //         return <Text style={[styles.screenFirstNumber, { fontSize: 50 }]}>{this.state.firstNumber}</Text>
-    //     }
-    // }
+    firstNumberDisplay = () => {
+        if (this.props.result !== null) {
+            return <Text style={this.props.result < 99999 ? [styles.screenFirstNumber, { color: colors.result }] : [styles.screenFirstNumber, { fontSize: 30, color: colors.result }]}>{this.props.result?.toString()}</Text>
+        }
+        if (this.props.firstNumber && this.props.firstNumber.length < 6) {
+            return <Text style={styles.screenFirstNumber}>{this.props.firstNumber}</Text>
+        }
+        if (this.props.firstNumber === "") {
+            return <Text style={styles.screenFirstNumber}>{"0"}</Text>
+        }
+        // if (this.props.firstNumber.length > 5 && this.props.firstNumber.length < 8) {
+        //     return <Text style={[styles.screenFirstNumber, { fontSize: 70 }]}>{this.props.firstNumber}</Text>
+        // }
+        if (this.props.firstNumber > 7) {
+            return <Text style={[styles.screenFirstNumber, { fontSize: 50 }]}>{this.props.firstNumber}</Text>
+        }
+    }
 
 
     renderItem = (item) => (
@@ -181,9 +181,9 @@ export class ReduxCalc extends Component {
     render() {
         return (
             <View style={styles.viewBottom}>
-                {/* <View style={{ height: moderateScale(120), width: "90%", justifyContent: 'flex-end', alignSelf: 'center' }}>
-                    <Text style={styles.screenSecondNumber}>{this.state.secondNumber}{' '}<Text style={{ color: "purple", fontSize: scale(30), fontWeight: '500' }}>{this.state.operation}</Text>{'  '}{this.firstNumberDisplay()}</Text>
-                </View> */}
+                <View style={{ height: moderateScale(120), width: "90%", justifyContent: 'flex-end', alignSelf: 'center' }}>
+                    <Text style={styles.screenSecondNumber}>{this.props.secondNumber}{' '}<Text style={{ color: "purple", fontSize: scale(30), fontWeight: '500' }}>{this.props.operation}</Text>{'  '}{this.firstNumberDisplay()}</Text>
+                </View>
                 <View style={styles.row}>
                     {
                         this.data.map((item) => {
@@ -201,7 +201,8 @@ const mapStateToProps = state => {
     return {
         firstNumber: state.calcReducer.firstNumber,
         secondNumber: state.calcReducer.secondNumber,
-        operation: state.calcReducer.operation
+        operation: state.calcReducer.operation,
+        result: state.calcReducer.result
     }
 }
 
