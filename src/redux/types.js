@@ -1,0 +1,7 @@
+export default {
+    FIRSTNUM: 'FIRSTNUM',
+    SECONDNUM: 'SECONDNUM',
+    OPERATION: 'OPERATION',
+    RESULT: 'RESULT',
+    CLEAR: 'CLEAR'
+}

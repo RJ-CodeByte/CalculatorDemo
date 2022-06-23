@@ -26,7 +26,7 @@ export class Calculator extends Component {
         }, {
             title: '%',
             operation: () => this.handleOperationPressed("%"),
-            isGrey: true
+            isGrey: true 
         },
         {
             title: "⌫",
@@ -108,19 +108,16 @@ export class Calculator extends Component {
     ]
 
     handleNumberPress = (buttonValue) => {
-        console.log('workingnum')
         if (this.state.firstNumber.length < 10) {
             this.setState({ firstNumber: this.state.firstNumber + buttonValue })
         }
     }
 
     handleOperationPressed = (buttonValue) => {
-        console.log('working%')
         this.setState({ operation: buttonValue, secondNumber: this.state.firstNumber, firstNumber: '' })
     }
 
     clear = () => {
-        console.log('working')
         this.setState({ operation: '', secondNumber: '', firstNumber: '', result: null })
     }
 

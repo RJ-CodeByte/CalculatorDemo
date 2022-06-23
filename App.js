@@ -4,6 +4,9 @@ import Calculator from './src/screens/Calculator/Calculator';
 import { ThemeContext } from "./src/context/ThemeContext";
 import { colors } from './src/constants/colors';
 import Button from './src/components/Button';
+import ReduxCalc from './src/screens/Calculator/ReduxCalc';
+import { Provider } from 'react-redux';
+import { Store } from './src/redux/store';
 
 
 export default class App extends Component {
@@ -17,11 +20,14 @@ export default class App extends Component {
     return (
       <ThemeContext.Provider value={this.state.theme}>
         <SafeAreaView style={this.state.theme === 'light' ? styles.container : [styles.container, { backgroundColor: colors.dark }]}>
-          <Switch
-            value={this.state.theme === 'light'}
-            onChange={() => this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' })}
-          />
-          <Calculator />
+          <Provider store={Store}>
+            <Switch
+              value={this.state.theme === 'light'}
+              onChange={() => this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' })}
+            />
+            {/* <Calculator /> */}
+            <ReduxCalc />
+          </Provider>
         </SafeAreaView>
       </ThemeContext.Provider>
     )
