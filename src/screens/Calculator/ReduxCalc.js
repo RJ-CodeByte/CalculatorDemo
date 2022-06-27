@@ -5,7 +5,7 @@ import Button from '../../components/Button'
 import { colors } from '../../constants/colors'
 import { moderateScale, scale } from 'react-native-size-matters'
 import { connect } from 'react-redux'
-import { clear, getResult, handleNumberPress, handleOperationPressed } from '../../redux/actions';
+import { clear, eraseNumber, getResult, handleNumberPress, handleOperationPressed } from '../../redux/actions';
 
 
 
@@ -26,7 +26,7 @@ export class ReduxCalc extends Component {
         },
         {
             title: "⌫",
-            // operation: () => this.setState({ firstNumber: this.state.firstNumber.slice(0, -1) }),
+            operation: () => this.props.eraseNumber(this.props.firstNumber.slice(0, -1)),
             isGrey: true
         },
         {
@@ -211,6 +211,7 @@ const mapDispatchToProps = (dispatch) => {
         handleNumberPress: (buttonValue) => dispatch(handleNumberPress(buttonValue)),
         handleOperationPressed: (buttonValue) => dispatch(handleOperationPressed(buttonValue)),
         getResult: (result) => dispatch(getResult(result)),
+        eraseNumber: (firstNumber) => dispatch(eraseNumber(firstNumber)),
         clear: () => dispatch(clear())
     };
 }

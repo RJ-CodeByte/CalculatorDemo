@@ -38,6 +38,16 @@ export const getResult = (result) => {
     }
 }
 
+export const eraseNumber = (firstNumber) => {
+    return dispatch => {
+        console.log("erase  to left:", firstNumber)
+        dispatch({
+            type: types.FIRSTNUM,
+            payload: firstNumber
+        })
+    }
+}
+
 export const clear = () => {
     return dispatch => {
         console.log("cleared")
